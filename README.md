@@ -25,18 +25,18 @@ series = {AAAI’20}
 
 ## 프로젝트 개요 
 ### 프로젝트 선정 배경 및 필요성 
-내에서 음원 스트리밍을 이용하는 수가 1520만명이 넘으면서 그에 따른 음원 추천 알고리즘도 개발되고 있다. 그중 감정에 따른 음원 추천 알고리즘도 개발 되고 있다. 감정을 구분하는 연구는 주로 음성인식, 표정 인식, 심박수등의 생리학적 요소로 판별하는 알고리즘의 연구가 대부분이다. 한국 컨텐츠 진흥원에서 발표한 2023년 음악 이용자 실태 조사에 따르면 출, 퇴근시나 도보 산책 등 보행시 음원을 이용하는 숫자는 전체 이용자 수의 45%로 걸으면서 음원을 재생하는 경우가 많다. 이때 얻을 수 있는 정보는 보행 정보이다. 보행 정보를 통해서 감정을 분류 하고 음원을 추천 하면 실시간으로 사용자의 감정에 맞게 추천 할 수 있다. 그래서 보행 분석을 통한 감정 분류에 따른 노래 추천 알고리즘을 개발 하고자 한다. 
+국내에서 음원 스트리밍을 이용하는 수가 1520만명이 넘으면서 그에 따른 음원 추천 알고리즘도 개발되고 있다. 그중 감정에 따른 음원 추천 알고리즘도 개발 되고 있다. 감정을 구분하는 연구는 주로 음성인식, 표정 인식, 심박수등의 생리학적 요소로 판별하는 알고리즘의 연구가 대부분이다. 한국 컨텐츠 진흥원에서 발표한 2023년 음악 이용자 실태 조사에 따르면 출, 퇴근시나 도보 산책 등 보행시 음원을 이용하는 숫자는 전체 이용자 수의 45%로 걸으면서 음원을 재생하는 경우가 많다. 이때 얻을 수 있는 정보는 보행 정보이다. 보행 정보를 통해서 감정을 분류 하고 음원을 추천 하면 실시간으로 사용자의 감정에 맞게 추천 할 수 있다. 그래서 보행 분석을 통한 감정 분류에 따른 노래 추천 알고리즘을 개발 하고자 한다. 
 ### 최종 결과물의 목표 
 STEP: Spatial Temporal Graph Convolutional Networks for Emotion Perception from Gaits 논문을 기반해서 보행분석으로 감정 분류하는 모델의 구조를 변경후 분석을 통해 논문이 제시한 성능 보다 향상 시키는 것이 목표이다. 
 
 ## 과제 수행방법 
-1. 데이터 셋
+#### 1. 데이터 셋
    본 프로젝트에서 사용한 데이터는 Emotion-Gait이다. Emotion-Gait는 실제 수집 데이터와 STEP-Gen을 토대로 만든 데이터로 구성된다. 실제 데이터는 STEP의 저자들이 직접 수집한 342개의 데이터와 Edinburgh Locomtion MOCAP 데이터 베이스에 있는 1,835개로 총 2,177개 이다. STEP-Gen을 통해 새롭게 1000개의 생성된 데이터를 더해 총 3,177개로 구성된다.
 
-2. 모델 학습
+#### 2. 모델 학습
    모델 학습을 위해서 Training, validation testing set을 7 :2 :1 비율로 나눴다. 배치 크기는 8, 에포크는 180으로 모델 학습 했으며 초기 학습률은 0.1로 Adam optimizer를 사용하여 최적화를 진행했다. 모멘텀은 0.9, 가중치 감쇠는 1e-4로 한 nestrerov 모멘텀을 사용하였다. 모델 학습 시 사용한 GPU는 NVIDIA GeForce RTX 3090dlek.
 
-3. 평가 지표
+#### 5. 평가 지표
    데이터 셋에서 라벨링된 감정과 모델이 에측한 감정을 비교해서 정확도를 측정했다.
    ![image](https://github.com/hoyoonchoi/STEP_by_STEP/assets/132192963/322b831a-44b0-479e-a921-afae69ecb651)
 
@@ -53,6 +53,7 @@ STEP 분류 모델은 3개의 STGCN layer와 AvgPool2D layer, Conv2D layer를 �
 
 ### 실험 1 (layer 추가 및 channel 증가) 
 STGCN 구조의 layer를 추가하는 실험과 STGCN 구조의 channel을 추가하는 실험을 진행한다. 
+
 ![image](https://github.com/hoyoonchoi/STEP_by_STEP/assets/132192963/506e0fac-9ccf-43b4-9fb4-c1705a296275)
 ![image](https://github.com/hoyoonchoi/STEP_by_STEP/assets/132192963/d90306ce-03c2-4f4a-a0d2-abdcc0c4ff9b)
 
@@ -72,7 +73,7 @@ STGCN 구조의 layer를 추가하는 실험과 STGCN 구조의 channel을 추�
 ![image](https://github.com/hoyoonchoi/STEP_by_STEP/assets/132192963/275cfd2d-ceba-4e69-847c-deb95cbf1c79)
 
 
-##결과 
+## 결과 
 ### 실험 1 수행 결과 
 ![image](https://github.com/hoyoonchoi/STEP_by_STEP/assets/132192963/7d903704-1020-4c21-84e4-c87f685bbd3b)
 ![image](https://github.com/hoyoonchoi/STEP_by_STEP/assets/132192963/9835db47-82d9-424c-960f-a99c83624237)
